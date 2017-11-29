@@ -18,8 +18,9 @@
 
 #define NUMAIN 6
 
-#define PERIOD 1e6
-#define NSAMPLES 32
+#define BILLION 1000000000
+#define PERIOD 1000000
+#define NSAMPLES 10
 
 extern char *pins[NUMAIN];
 
