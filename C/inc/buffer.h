@@ -27,6 +27,6 @@ void buffer_destroy(Buffer *b);
 
 void enqueue(Buffer *b, int value);
 
-void dequeue(Buffer *b, int values[]);
+void dequeue(Buffer *b, int *values);
 
 #endif /* INC_BUFFER_H_ */

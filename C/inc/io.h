@@ -8,30 +8,26 @@
 #ifndef INC_IO_H_
 #define INC_IO_H_
 
-#include <time.h>
+
 #include <pthread.h>
 #include <buffer.h>
 
 typedef int PIN;
 
 typedef struct {
-	pthread_mutex_t lock;
-	pthread_t th_pread, th_fourier;
-	struct timespec ts;
-	int enabled;
-	PIN pin;
-	Buffer buff;
+	pthread_mutex_t lock;			// lock that protects the conditional variable
+	pthread_cond_t	cond;			// conditional variable for detection flag
+	int detection;					// flag indicating detection
+	pthread_t th_pread, th_detect;	// handles for pin reading and detection threads
+	struct timespec ts;				// contains pin sampling rate information
+	PIN pin;						// handle to the pin being read
+	Buffer buff;					// Buffer object containing read samples passed b/w read/detect
 } PERIODIC;
 
-//PIN request_pin(int pin);
 
 int read_pin(PIN pin);
 
-//int release_pin(PIN pin);
-
 void init_periodic_read(PERIODIC *p);
-
-void end_periodic_read(PERIODIC *p);
 
 void *_reader(void *args);
 

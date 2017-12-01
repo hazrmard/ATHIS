@@ -38,7 +38,7 @@ void enqueue(Buffer *b, int value) {
 	pthread_mutex_unlock(&b->lock);
 }
 
-void dequeue(Buffer *b, int values[]) {
+void dequeue(Buffer *b, int *values) {
 	pthread_mutex_lock(&b->lock);
 	while (b->n < b->N) {
 		pthread_cond_wait(&b->cond, &b->lock);
